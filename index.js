@@ -69,8 +69,17 @@ class Tree {
     }
 
     //insert a node with given value into the tree
-    insertNode() {
-        return;
+    insertNode(node, value) {
+        //base case
+        if (node == null) {
+            node = new Node(value);
+            return node;
+        }
+
+        if (node.value > value) {
+            return this.insertNode(node.left, value);
+        }
+        return this.insertNode(node.right, value);
     }
 
     //delete a given value from the tree
@@ -142,3 +151,4 @@ console.log(`Maximum aesthetics binary tree ${tree.prettyPrint(tree.root, prefix
 // console.log(tree.buildTree(tree.sortedArray, 0, tree.sortedArray.length - 1))
 // console.log(tree.preOrder(tree.root))
 console.log(tree.findNode(tree.root, 890791823))
+console.log(tree.insertNode(tree.root, 1624))
