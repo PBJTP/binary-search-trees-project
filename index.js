@@ -79,8 +79,14 @@ class Tree {
     }
 
     //return a node with given value, else return nothing
-    findNode() {
-        return;
+    findNode(node, value) {
+        //base case
+        if (node == null || node.value == value) return node;
+
+        if (node.value > value) {
+            return this.findNode(node.left, value);
+        }
+        return this.findNode(node.right, value);
     }
 
     //return an array with the levelOrder search method
@@ -127,11 +133,12 @@ class Tree {
 let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324,1,2,45,367,567,2345,456,234,457,2345234,4577,45,45,734,3,2,2,7,8,4,435]
 
 let tree = new Tree(data);
-console.log(tree.root)
+// console.log(tree.root)
 // tree.prettyPrint(tree.buildTree(tree.root, 0, tree.sortedArray.length - 1))
-console.log(`Original data ${data}`);
-console.log(`Sorted and removed duplicates ${tree.sortedArray}`)
+// console.log(`Original data ${data}`);
+// console.log(`Sorted and removed duplicates ${tree.sortedArray}`)
 console.log(`Maximum aesthetics binary tree ${tree.prettyPrint(tree.root, prefix = '', isLeft = true)}`)
 // console.log(tree.root)
 // console.log(tree.buildTree(tree.sortedArray, 0, tree.sortedArray.length - 1))
 // console.log(tree.preOrder(tree.root))
+console.log(tree.findNode(tree.root, 890791823))
