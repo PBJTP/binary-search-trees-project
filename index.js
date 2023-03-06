@@ -10,8 +10,6 @@ class Tree {
     constructor(array) {
         this.sortedArray = this.mergeSort(this.removeDuplicates(array));
         this.root = this.buildTree(this.sortedArray, 0, this.sortedArray.length - 1);
-        // this.array = this.mergeSort(this.removeDuplicates(array));
-        // this.root = this.array[Math.floor(array.length / 2)];
     }
 
     buildTree(array, start, end) {
@@ -69,12 +67,67 @@ class Tree {
           this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
         }
     }
+
+    //insert a node with given value into the tree
+    insertNode() {
+        return;
+    }
+
+    //delete a given value from the tree
+    deleteNode() {
+        return;
+    }
+
+    //return a node with given value, else return nothing
+    findNode() {
+        return;
+    }
+
+    //return an array with the levelOrder search method
+    levelOrder() {
+        return;
+    }
+
+    //return an array with the inOrder search method
+    inOrder() {
+        return;
+    }
+
+    //return an array with the preOrder search method
+    preOrder() {
+        return;
+    }
+
+    //return an array with the postOrder search method
+    postOrder() {
+        return;
+    }
+
+    //return the height of a given node from the tree
+    height() {
+        return;
+    }
+
+    //return the depth of a given node from the tree
+    depth() {
+        return;
+    }
+
+    //check to the see if the tree is balanced, difference in height between left and right is not more than 1
+    isBalanced() {
+        return;
+    }
+
+    //rebalance an unbalanced tree. TIP use the traversal metod to return a new array from the tree
+    rebalance() {
+        return;
+    }
 }
 
-let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324]
+let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324,1,2,45,367,567,2345,456,234,457,2345234,4577,45,45,734,3,2,2,7,8,4,435]
 
 let tree = new Tree(data);
-
+console.log(tree.root)
 // tree.prettyPrint(tree.buildTree(tree.root, 0, tree.sortedArray.length - 1))
 console.log(`Original data ${data}`);
 console.log(`Sorted and removed duplicates ${tree.sortedArray}`)
