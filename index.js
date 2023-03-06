@@ -1,27 +1,30 @@
 class Node {
-    constructor(value, left, right) {
+    constructor(value) {
         this.value = value
-        this.left = left
-        this.right = right
+        this.left = null
+        this.right = null
     }
 }
 
 class Tree {
     constructor(array) {
-        this.array = this.mergeSort(this.removeDuplicates(array));
-        this.root = array[Math.floor(array.length / 2)];
+        this.sortedArray = this.mergeSort(this.removeDuplicates(array));
+        this.root = this.buildTree(this.sortedArray, 0, this.sortedArray.length - 1);
+        // this.array = this.mergeSort(this.removeDuplicates(array));
+        // this.root = this.array[Math.floor(array.length / 2)];
     }
 
-    buildTree(array) {
-        if (array.length < 2) return new Node
+    buildTree(array, start, end) {
+        
+        //base case
+        if (start > end) return null;
+        //get middle element and make it root
+        let mid = parseInt((start + end) / 2);
+        let node = new Node(array[mid]);
 
-        const middle = Math.floor(array.length / 2);
-        const left = array.slice(0, middle);
-        const right = array.slice(middle);
-
-        this.root = new Node(array[middle], left, right);
-    
-        return [this.buildTree(left), this.buildTree(right)]
+        node.left = this.buildTree(array, start, mid - 1);
+        node.right = this.buildTree(array, mid + 1, end);
+        return node;
     }
 
     mergeSort(array) {
@@ -62,7 +65,16 @@ class Tree {
         console.log(this.root)
     }
 
+    preOrder(node) {
+        if(node == null) return;
+
+        console.log(node.value + " ")
+        this.preOrder(node.left)
+        this.preOrder(node.right);
+    }
+
     prettyPrint(node, prefix = '', isLeft = true) {
+        // console.log(node)
         if (node.right !== null) {
           this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
         }
@@ -77,4 +89,8 @@ let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324]
 
 let tree = new Tree(data);
 
-tree.print()
+// tree.prettyPrint(tree.buildTree(tree.root, 0, tree.sortedArray.length - 1))
+console.log(tree.prettyPrint(tree.root, prefix = '', isLeft = true))
+console.log(tree.sortedArray)
+console.log(tree.root.value)
+console.log(tree.buildTree(tree.sortedArray, 0, tree.sortedArray.length - 1))
