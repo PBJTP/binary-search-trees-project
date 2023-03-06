@@ -74,11 +74,10 @@ class Tree {
     }
 
     prettyPrint(node, prefix = '', isLeft = true) {
-        // console.log(node)
         if (node.right !== null) {
           this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
         }
-        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
         if (node.left !== null) {
           this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
         }
@@ -92,5 +91,6 @@ let tree = new Tree(data);
 // tree.prettyPrint(tree.buildTree(tree.root, 0, tree.sortedArray.length - 1))
 console.log(tree.prettyPrint(tree.root, prefix = '', isLeft = true))
 console.log(tree.sortedArray)
-console.log(tree.root.value)
-console.log(tree.buildTree(tree.sortedArray, 0, tree.sortedArray.length - 1))
+// console.log(tree.root)
+// console.log(tree.buildTree(tree.sortedArray, 0, tree.sortedArray.length - 1))
+// console.log(tree.preOrder(tree.root))
