@@ -60,19 +60,6 @@ class Tree {
         return uniqueValues;
     }
 
-    print() {
-        console.log(this.array)
-        console.log(this.root)
-    }
-
-    preOrder(node) {
-        if(node == null) return;
-
-        console.log(node.value + " ")
-        this.preOrder(node.left)
-        this.preOrder(node.right);
-    }
-
     prettyPrint(node, prefix = '', isLeft = true) {
         if (node.right !== null) {
           this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
@@ -89,8 +76,9 @@ let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324]
 let tree = new Tree(data);
 
 // tree.prettyPrint(tree.buildTree(tree.root, 0, tree.sortedArray.length - 1))
-console.log(tree.prettyPrint(tree.root, prefix = '', isLeft = true))
-console.log(tree.sortedArray)
+console.log(`Original data ${data}`);
+console.log(`Sorted and removed duplicates ${tree.sortedArray}`)
+console.log(`Maximum aesthetics binary tree ${tree.prettyPrint(tree.root, prefix = '', isLeft = true)}`)
 // console.log(tree.root)
 // console.log(tree.buildTree(tree.sortedArray, 0, tree.sortedArray.length - 1))
 // console.log(tree.preOrder(tree.root))
