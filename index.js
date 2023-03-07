@@ -10,6 +10,7 @@ class Tree {
     constructor(array) {
         this.sortedArray = this.mergeSort(this.removeDuplicates(array));
         this.root = this.buildTree(this.sortedArray, 0, this.sortedArray.length - 1);
+        this.prettyPrint(this.root);
     }
 
     buildTree(array, start, end) {
@@ -69,17 +70,25 @@ class Tree {
     }
 
     //insert a node with given value into the tree
-    insertNode(node, value) {
+    insertNode(value, node = this.root) {
         //base case
         if (node == null) {
             node = new Node(value);
             return node;
         }
 
-        if (node.value > value) {
-            return this.insertNode(node.left, value);
+        if (value < node.value) {
+            node.left =  this.insertNode(value, node.left);
+        } else if (value > node.value) {
+            node.right = this.insertNode(value, node.right)
         }
-        return this.insertNode(node.right, value);
+        
+        return node;
+    }
+
+    insert(value) {
+        this.root = this.insertNode(this.root, value)
+        // this.prettyPrint(this.root)
     }
 
     //delete a given value from the tree
@@ -142,13 +151,8 @@ class Tree {
 let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324,1,2,45,367,567,2345,456,234,457,2345234,4577,45,45,734,3,2,2,7,8,4,435]
 
 let tree = new Tree(data);
-// console.log(tree.root)
-// tree.prettyPrint(tree.buildTree(tree.root, 0, tree.sortedArray.length - 1))
-// console.log(`Original data ${data}`);
-// console.log(`Sorted and removed duplicates ${tree.sortedArray}`)
-console.log(`Maximum aesthetics binary tree ${tree.prettyPrint(tree.root, prefix = '', isLeft = true)}`)
-// console.log(tree.root)
-// console.log(tree.buildTree(tree.sortedArray, 0, tree.sortedArray.length - 1))
-// console.log(tree.preOrder(tree.root))
+
+console.log(tree.findNode(tree.root, 67))
 console.log(tree.findNode(tree.root, 890791823))
-console.log(tree.insertNode(tree.root, 1624))
+console.log(tree.insertNode(1624, tree.root))
+tree.prettyPrint(tree.root)
