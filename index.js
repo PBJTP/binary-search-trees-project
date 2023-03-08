@@ -110,8 +110,6 @@ class Tree {
 
             node.value = this.minValue(node.right);
             node.right = this.deleteNode(node.value, node.right);
-            console.log('it got here')
-            
         }
         return node;
     }
@@ -215,13 +213,14 @@ let tree = new Tree(data);
 // console.log(tree.delete(974))
 // tree.delete(23)
 // tree.delete(7)
-tree.preOrder(tree.root, [])
-console.log(tree.preOrder())
-console.log(tree.inOrder())
-console.log(tree.postOrder())
-// console.log(tree.height(7))
-// console.log(tree.height(234))
-// console.log(tree.height(8))
+// tree.preOrder(tree.root, [])
+// console.log(tree.preOrder())
+// console.log(tree.inOrder())
+// console.log(tree.postOrder())
+console.log(tree.height(7))
+console.log(tree.height(234))
+console.log(tree.height(8))
+console.log(tree.height(2345))
 // console.log(tree.root)
 // tree.prettyPrint(tree.root)
 // console.log(tree.delete(1))
