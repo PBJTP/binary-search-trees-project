@@ -197,8 +197,15 @@ class Tree {
     }
 
     //return the depth of a given node from the tree
-    depth() {
-        return;
+    depth(value, node = this.root, depth = 0) {
+        if (node == null) return;
+        if (node.value === value) return depth; 
+
+        if (node.value < value) {
+            return this.depth(value, node.right, depth + 1)
+        } else if (node.value > value) {
+            return this.depth(value, node.left, depth + 1)
+        }
     }
 
     //check to the see if the tree is balanced, difference in height between left and right is not more than 1
@@ -216,10 +223,10 @@ let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324,1,2,45,367,567,2345,456,234,457,2
 
 let tree = new Tree(data);
 
-console.log(tree.findNode(this.root, 67))
+console.log(tree.findNode(tree.root, 67))
 // console.log(tree.findNode(tree.root, 890791823))
 // console.log(tree.insertNode(1624, tree.root))
-// console.log(tree.insert(974))
+console.log(tree.insert(974))
 // console.log(tree.delete(974))
 // tree.delete(23)
 // tree.delete(7)
@@ -227,11 +234,12 @@ console.log(tree.findNode(this.root, 67))
 // console.log(tree.preOrder())
 // console.log(tree.inOrder())
 // console.log(tree.postOrder())
-console.log(tree.height(tree.findNode(this.root, 67)))
+console.log('The height is' + tree.height(tree.findNode(this.root, 67)))
 console.log(tree.height(tree.findNode(this.root, 234)))
 console.log(tree.height(tree.findNode(this.root, 8)))
 console.log(tree.height(tree.findNode(this.root, 2345)))
 // console.log(tree.root)
 // tree.prettyPrint(tree.root)
 // console.log(tree.delete(1))
-console.log(tree.levelOrder())
+// console.log(tree.levelOrder())
+console.log("The depth of this node is " + tree.depth(974));
