@@ -87,13 +87,41 @@ class Tree {
     }
 
     insert(value) {
-        this.root = this.insertNode(this.root, value)
-        // this.prettyPrint(this.root)
+        this.root = this.insertNode(value, this.root)
+        this.prettyPrint(this.root)
     }
 
     //delete a given value from the tree
-    deleteNode() {
-        return;
+    deleteNode(value, node = this.root) {
+        if (node == null) return node;
+        if (value < node.value) {
+            node.left = this.deleteNode(value, node.left)
+        } else if (value > node.value) {
+            node.right = this.deleteNode(value, node.right)
+        } else {
+            if (node.left == null) return node.right;
+            else if (node.right == null) return node.left;
+
+            node.value = this.minValue(node.right);
+            node.right = this.deleteNode(node.value, node.right);
+            console.log('it got here')
+            
+        }
+        return node;
+    }
+
+    delete(value) {
+        this.root = this.deleteNode(value, this.root);
+        this.prettyPrint(this.root)
+    }
+
+    minValue(node) {
+        let minv = node.value;
+        while (node.left != null) {
+            minv = node.left.value;
+            node = node.left
+        }
+        return minv;
     }
 
     //return a node with given value, else return nothing
@@ -152,7 +180,13 @@ let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324,1,2,45,367,567,2345,456,234,457,2
 
 let tree = new Tree(data);
 
-console.log(tree.findNode(tree.root, 67))
-console.log(tree.findNode(tree.root, 890791823))
-console.log(tree.insertNode(1624, tree.root))
-tree.prettyPrint(tree.root)
+// console.log(tree.findNode(tree.root, 67))
+// console.log(tree.findNode(tree.root, 890791823))
+// console.log(tree.insertNode(1624, tree.root))
+console.log(tree.insert(974))
+console.log(tree.delete(974))
+tree.delete(23)
+tree.delete(7)
+// console.log(tree.root)
+// tree.prettyPrint(tree.root)
+// console.log(tree.delete(1))
