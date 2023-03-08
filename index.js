@@ -13,6 +13,7 @@ class Tree {
         this.prettyPrint(this.root);
     }
 
+    //Build the tree with the given sorted array
     buildTree(array, start, end) {
         
         //base case
@@ -26,6 +27,7 @@ class Tree {
         return node;
     }
 
+    //Sort the array low to high
     mergeSort(array) {
         //base case
         if (array.length < 2) return array;
@@ -38,6 +40,7 @@ class Tree {
         return this.merge(this.mergeSort(left), this.mergeSort(right));
     };
     
+    //helper function for merge sort
     merge(left, right) {
         let sortedArray = [];
         while (left.length && right.length) {
@@ -51,6 +54,7 @@ class Tree {
         return [...sortedArray, ...left, ...right];
     }
 
+    //remove duplicates from array
     removeDuplicates(array) {
         let uniqueValues = array.filter((x, index) => {
             return array.indexOf(x) === index;
@@ -59,6 +63,7 @@ class Tree {
         return uniqueValues;
     }
 
+    //print tree in the console or terminal with maximum aesthetics
     prettyPrint(node, prefix = '', isLeft = true) {
         if (node.right !== null) {
           this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
@@ -85,7 +90,8 @@ class Tree {
         
         return node;
     }
-
+    
+    //Insert and prettyPrint
     insert(value) {
         this.root = this.insertNode(value, this.root)
         this.prettyPrint(this.root)
@@ -110,11 +116,7 @@ class Tree {
         return node;
     }
 
-    delete(value) {
-        this.root = this.deleteNode(value, this.root);
-        this.prettyPrint(this.root)
-    }
-
+    //Helper for deleteNode
     minValue(node) {
         let minv = node.value;
         while (node.left != null) {
@@ -122,6 +124,12 @@ class Tree {
             node = node.left
         }
         return minv;
+    }
+    
+    //delete node and prettyPrint
+    delete(value) {
+        this.root = this.deleteNode(value, this.root);
+        this.prettyPrint(this.root)
     }
 
     //return a node with given value, else return nothing
@@ -137,6 +145,7 @@ class Tree {
 
     //return an array with the levelOrder search method
     levelOrder() {
+
         return;
     }
 
@@ -146,8 +155,14 @@ class Tree {
     }
 
     //return an array with the preOrder search method
-    preOrder() {
-        return;
+    preOrder(node = this.root, preOrderArr = []) {
+        if (node === null) return;
+
+        preOrderArr.push(node.value)
+        this.preOrder(node.left, preOrderArr);
+        this.preOrder(node.right, preOrderArr);
+
+        return preOrderArr;
     }
 
     //return an array with the postOrder search method
@@ -183,10 +198,12 @@ let tree = new Tree(data);
 // console.log(tree.findNode(tree.root, 67))
 // console.log(tree.findNode(tree.root, 890791823))
 // console.log(tree.insertNode(1624, tree.root))
-console.log(tree.insert(974))
-console.log(tree.delete(974))
-tree.delete(23)
-tree.delete(7)
+// console.log(tree.insert(974))
+// console.log(tree.delete(974))
+// tree.delete(23)
+// tree.delete(7)
+tree.preOrder(tree.root, [])
+console.log(tree.preOrder())
 // console.log(tree.root)
 // tree.prettyPrint(tree.root)
 // console.log(tree.delete(1))
