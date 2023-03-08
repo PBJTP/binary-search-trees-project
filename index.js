@@ -172,8 +172,14 @@ class Tree {
     }
 
     //return an array with the postOrder search method
-    postOrder() {
-        return;
+    postOrder(node = this.root, postOrderArr = []) {
+        if (node === null) return;
+
+        this.postOrder(node.left, postOrderArr);
+        this.postOrder(node.right, postOrderArr);
+        postOrderArr.push(node.value)
+
+        return postOrderArr;
     }
 
     //return the height of a given node from the tree
@@ -212,6 +218,7 @@ let tree = new Tree(data);
 tree.preOrder(tree.root, [])
 console.log(tree.preOrder())
 console.log(tree.inOrder())
+console.log(tree.postOrder())
 // console.log(tree.height(7))
 // console.log(tree.height(234))
 // console.log(tree.height(8))
