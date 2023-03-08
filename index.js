@@ -150,8 +150,14 @@ class Tree {
     }
 
     //return an array with the inOrder search method
-    inOrder() {
-        return;
+    inOrder(node = this.root, inOrderArr = []) {
+        if (node === null) return;
+        
+        this.inOrder(node.left, inOrderArr);
+        inOrderArr.push(node.value);
+        this.inOrder(node.right, inOrderArr);
+
+        return inOrderArr;
     }
 
     //return an array with the preOrder search method
@@ -171,8 +177,9 @@ class Tree {
     }
 
     //return the height of a given node from the tree
-    height() {
-        return;
+    height(node = this.root) {
+        if (node == null) return 0;
+        return Math.max(this.height(node.left), this.height(node.right)) + 1;
     }
 
     //return the depth of a given node from the tree
@@ -204,6 +211,10 @@ let tree = new Tree(data);
 // tree.delete(7)
 tree.preOrder(tree.root, [])
 console.log(tree.preOrder())
+console.log(tree.inOrder())
+// console.log(tree.height(7))
+// console.log(tree.height(234))
+// console.log(tree.height(8))
 // console.log(tree.root)
 // tree.prettyPrint(tree.root)
 // console.log(tree.delete(1))
