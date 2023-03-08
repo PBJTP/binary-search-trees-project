@@ -131,7 +131,7 @@ class Tree {
     }
 
     //return a node with given value, else return nothing
-    findNode(node, value) {
+    findNode(node = this.root, value) {
         //base case
         if (node == null || node.value == value) return node;
 
@@ -142,9 +142,19 @@ class Tree {
     }
 
     //return an array with the levelOrder search method
-    levelOrder() {
+    levelOrder(callback) {
+        if (this.root == null) return;
 
-        return;
+        const queue = [this.root];
+        const levelOrderArr = [];
+        while (queue.length > 0) {
+            const node = queue.shift();
+            if (node.left !== null) queue.push(node.left);
+            if (node.right !== null) queue.push(node.right);
+            if (callback) callback(node)
+            else levelOrderArr.push(node.value)
+        }
+        return levelOrderArr;
     }
 
     //return an array with the inOrder search method
@@ -206,7 +216,7 @@ let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324,1,2,45,367,567,2345,456,234,457,2
 
 let tree = new Tree(data);
 
-// console.log(tree.findNode(tree.root, 67))
+console.log(tree.findNode(this.root, 67))
 // console.log(tree.findNode(tree.root, 890791823))
 // console.log(tree.insertNode(1624, tree.root))
 // console.log(tree.insert(974))
@@ -217,10 +227,11 @@ let tree = new Tree(data);
 // console.log(tree.preOrder())
 // console.log(tree.inOrder())
 // console.log(tree.postOrder())
-console.log(tree.height(7))
-console.log(tree.height(234))
-console.log(tree.height(8))
-console.log(tree.height(2345))
+console.log(tree.height(tree.findNode(this.root, 67)))
+console.log(tree.height(tree.findNode(this.root, 234)))
+console.log(tree.height(tree.findNode(this.root, 8)))
+console.log(tree.height(tree.findNode(this.root, 2345)))
 // console.log(tree.root)
 // tree.prettyPrint(tree.root)
 // console.log(tree.delete(1))
+console.log(tree.levelOrder())
