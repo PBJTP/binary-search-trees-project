@@ -94,7 +94,7 @@ class Tree {
     //Insert and prettyPrint
     insert(value) {
         this.root = this.insertNode(value, this.root)
-        this.prettyPrint(this.root)
+        // this.prettyPrint(this.root)
     }
 
     //delete a given value from the tree
@@ -209,14 +209,20 @@ class Tree {
     }
 
     //check to the see if the tree is balanced, difference in height between left and right is not more than 1
-    isBalanced() {
-        return;
+    isBalanced(node = this.root) {
+        if(node == null) return true;
+        
+        if (Math.abs(this.height(node.left) - this.height(node.right)) <= 1 &&
+        this.isBalanced(node.right) == true &&
+        this.isBalanced(node.left) == true) {
+            return true;
+        }
+        return false;
     }
 
     //rebalance an unbalanced tree. TIP use the traversal method to return a new array from the tree
     rebalance() {
         const inOrderList = this.inOrder();
-        console.log(inOrderList)
         this.root = this.buildTree(inOrderList);
     }
 }
@@ -225,9 +231,10 @@ let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324,1,2,45,367,567,2345,456,234,457,2
 
 let tree = new Tree(data);
 
-console.log(tree.findNode(tree.root, 67))
+// console.log(tree.findNode(tree.root, 67))
 // console.log(tree.findNode(tree.root, 890791823))
 // console.log(tree.insertNode(1624, tree.root))
+console.log(tree.isBalanced())
 console.log(tree.insert(971244))
 console.log(tree.insert(972131244))
 console.log(tree.insert(971241244))
@@ -248,6 +255,8 @@ console.log(tree.insert(97125244))
 // tree.prettyPrint(tree.root)
 // console.log(tree.delete(1))
 // console.log(tree.levelOrder())
-console.log("The depth of this node is " + tree.depth(567));
+// console.log("The depth of this node is " + tree.depth(567));
+console.log(tree.isBalanced());
 tree.rebalance();
+console.log(tree.isBalanced());
 tree.prettyPrint(tree.root)
