@@ -14,7 +14,7 @@ class Tree {
     }
 
     //Build the tree with the given sorted array
-    buildTree(array, start, end) {
+    buildTree(array, start = 0, end = array.length - 1) {
         
         //base case
         if (start > end) return null;
@@ -213,9 +213,11 @@ class Tree {
         return;
     }
 
-    //rebalance an unbalanced tree. TIP use the traversal metod to return a new array from the tree
+    //rebalance an unbalanced tree. TIP use the traversal method to return a new array from the tree
     rebalance() {
-        return;
+        const inOrderList = this.inOrder();
+        console.log(inOrderList)
+        this.root = this.buildTree(inOrderList);
     }
 }
 
@@ -226,7 +228,11 @@ let tree = new Tree(data);
 console.log(tree.findNode(tree.root, 67))
 // console.log(tree.findNode(tree.root, 890791823))
 // console.log(tree.insertNode(1624, tree.root))
-console.log(tree.insert(974))
+console.log(tree.insert(971244))
+console.log(tree.insert(972131244))
+console.log(tree.insert(971241244))
+console.log(tree.insert(9712124344))
+console.log(tree.insert(97125244))
 // console.log(tree.delete(974))
 // tree.delete(23)
 // tree.delete(7)
@@ -234,12 +240,14 @@ console.log(tree.insert(974))
 // console.log(tree.preOrder())
 // console.log(tree.inOrder())
 // console.log(tree.postOrder())
-console.log('The height is' + tree.height(tree.findNode(this.root, 67)))
-console.log(tree.height(tree.findNode(this.root, 234)))
-console.log(tree.height(tree.findNode(this.root, 8)))
-console.log(tree.height(tree.findNode(this.root, 2345)))
+// console.log('The height is' + tree.height(tree.findNode(this.root, 67)))
+// console.log(tree.height(tree.findNode(this.root, 234)))
+// console.log(tree.height(tree.findNode(this.root, 8)))
+// console.log(tree.height(tree.findNode(this.root, 2345)))
 // console.log(tree.root)
 // tree.prettyPrint(tree.root)
 // console.log(tree.delete(1))
 // console.log(tree.levelOrder())
-console.log("The depth of this node is " + tree.depth(974));
+console.log("The depth of this node is " + tree.depth(567));
+tree.rebalance();
+tree.prettyPrint(tree.root)
