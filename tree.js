@@ -58,7 +58,7 @@ class Tree {
     }
 
     //print tree in the console or terminal with maximum aesthetics
-    prettyPrint(node, prefix = '', isLeft = true) {
+    prettyPrint(node = this.root, prefix = '', isLeft = true) {
         if (node.right !== null) {
           this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
         }
@@ -219,40 +219,14 @@ class Tree {
         const inOrderList = this.inOrder();
         this.root = this.buildTree(inOrderList);
     }
+
+    //Print level, pre, in, and post order to console
+    printAll() {
+        console.log(`The level order of this BST is ` + this.levelOrder());
+        console.log(`The pre order of this BST is ` + this.preOrder());
+        console.log(`The post order of this BST is ` + this.postOrder());
+        console.log(`The in order of this BST is ` + this.inOrder());
+    }
 }
 
-// let data = [1,7,4,23,8,9,4,3,5,7,9,67,6345,324,1,2,45,367,567,2345,456,234,457,2345234,4577,45,45,734,3,2,2,7,8,4,435]
-
-// let tree = new Tree(data);
-
-
 module.exports = Tree;
-// console.log(tree.findNode(tree.root, 67))
-// console.log(tree.findNode(tree.root, 890791823))
-// console.log(tree.insertNode(1624, tree.root))
-// console.log(tree.isBalanced())
-// console.log(tree.insert(971244))
-// console.log(tree.insert(972131244))
-// console.log(tree.insert(971241244))
-// console.log(tree.insert(9712124344))
-// console.log(tree.insert(97125244))
-// console.log(tree.delete(974))
-// tree.delete(23)
-// tree.delete(7)
-// tree.preOrder(tree.root, [])
-// console.log(tree.preOrder())
-// console.log(tree.inOrder())
-// console.log(tree.postOrder())
-// console.log('The height is' + tree.height(tree.findNode(this.root, 67)))
-// console.log(tree.height(tree.findNode(this.root, 234)))
-// console.log(tree.height(tree.findNode(this.root, 8)))
-// console.log(tree.height(tree.findNode(this.root, 2345)))
-// console.log(tree.root)
-// tree.prettyPrint(tree.root)
-// console.log(tree.delete(1))
-// console.log(tree.levelOrder())
-// console.log("The depth of this node is " + tree.depth(567));
-// console.log(tree.isBalanced());
-// tree.rebalance();
-// console.log(tree.isBalanced());
-// tree.prettyPrint(tree.root)
